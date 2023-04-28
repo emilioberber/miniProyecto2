@@ -14,16 +14,16 @@ const productosBase = [
    
 ]
 
+// OR lógico para cargar local storage, en caso del array estar vacío pues no guarda nada
 let carrito = JSON.parse(localStorage.getItem("carrito"))||[]
 
 const totalCarritoRender = () =>{
+    // se encarga de calcular el total del carrito
     const carritoTotal = document.getElementById("carritoTotal")
     let total = carrito.reduce((acumulador, {price, quantity }) => {
         return acumulador + (price*quantity)
     },0)
     carritoTotal.innerHTML = `Precio total: $${total}`
-    let carritoString = JSON.stringify(carrito)
-    localStorage.setItem("carrito", carritoString)
 }
 
 const agregarCarrito =(objetoCarrito)=>{
@@ -103,6 +103,7 @@ const renderizarProductos =()=>{
 }
 
 const finalizarCompra = ()=>{
+    // Borra el array y le da un mensaje al usuario
     borrarCarrito()
     let mensaje = document.getElementById("carritoTotal")
     mensaje.innerHTML = "Muchas gracias por su compra, los esperamos pronto"
